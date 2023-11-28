@@ -1,0 +1,42 @@
+int len(ListNode *head1)
+    {
+        int count=0;
+        ListNode *head = head1;
+        while(head)
+        {
+            count++;
+            head= head->next;
+        }
+        return count;
+    }
+    bool isPalindrome(ListNode* head) {
+        int length = len(head);
+        int cnt = 1;
+        ListNode *prev = NULL;
+        ListNode *curr = head;
+        ListNode * n;
+        while(cnt<=length/2)
+        {
+            n = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = n;
+            cnt++;
+        }
+        ListNode *temp = prev;
+        if(length%2)
+        {
+            curr = curr->next;
+        }
+        while(temp and curr)
+        {
+            if(curr->val!=temp->val)
+            {
+                return false;
+            }
+            temp = temp->next;
+            curr = curr->next;
+        }
+        return true;
+    }
+};

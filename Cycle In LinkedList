@@ -1,0 +1,15 @@
+ bool hasCycle(ListNode *head)
+    {
+        ListNode *temp=head;
+        set<ListNode *>set;
+        while(temp!=NULL)
+        {
+            if(set.find(temp)!=set.end())
+            {
+                return true;
+            }
+            set.insert(temp);
+            temp=temp->next;
+        }
+        return false;
+    }

@@ -1,0 +1,34 @@
+class Solution {
+public:
+    bool is_vowel(char a){
+    if(a == 'a' || a == 'u' || a == 'e' || a == 'o' || a == 'i'){
+        return true;
+    }
+    return false;
+}
+    int countVowelSubstrings(string word) {
+        if(word.size()<5)
+            return 0;
+        int ans=0;
+        for(int i=0;i<word.size()-4;i++){
+            map<char,int>mp;
+            for(int j=i;j<word.size();j++){
+               
+                if(is_vowel(word[j])){
+                    cout<<"hello ";
+                    mp[word[j]]++;
+                    if(mp['a'] >=1 && mp['e'] >=1 && mp['i'] >=1 && mp['o'] >=1 && mp['u'] >=1)
+                    {
+                        ans++;
+                    }
+                }
+                else
+                    break;
+                
+            }
+            mp.clear();
+            
+        }
+        return ans;
+    }
+};

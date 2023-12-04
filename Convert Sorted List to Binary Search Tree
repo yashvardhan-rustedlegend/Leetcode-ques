@@ -1,0 +1,26 @@
+class Solution {
+public:
+     TreeNode* maketree(vector<int>& vec, int start, int end)
+    {
+        if(start==end) return NULL;
+        
+        int mid = start + (end-start)/2;
+        TreeNode* root = new TreeNode(vec[mid]);
+        
+        root->left = maketree(vec, start, mid);
+        root->right =  maketree(vec, mid+1, end);
+        
+        return root;
+    }
+    TreeNode* sortedListToBST(ListNode* head) {
+        vector<int> vec;
+        if(!head) return NULL;
+        for(auto temp = head; temp!=NULL; temp = temp->next)
+        {
+            vec.push_back(temp->val);
+        }
+        TreeNode* root = maketree(vec, 0, vec.size());
+        
+        return root;
+    }
+};

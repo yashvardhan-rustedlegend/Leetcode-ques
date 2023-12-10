@@ -1,0 +1,60 @@
+class Solution {
+public:
+      ListNode* merge(ListNode* left, ListNode* right){
+        ListNode* merged = new ListNode(0);
+        ListNode* current = merged;
+        while(left && right){
+
+            if(left->val < right->val){
+                current->next=left;
+                left=left->next;
+            }
+            else if(right->val < left->val){
+                current->next=right;
+                right=right->next;
+            }
+            else{
+                current->next=left;
+                left=left->next;
+
+                current=current->next;
+
+                current->next=right;
+                right=right->next;
+            }
+            current=current->next;
+        }
+        while(left){
+            current->next=left;
+            current=current->next;
+            left=left->next;
+        }
+        while(right){
+            current->next=right;
+            current=current->next;
+            right=right->next;
+        }
+        return merged->next;
+
+    }
+    ListNode* helperMerge(vector<ListNode*>& lists,int start,int end){
+        if(start == end){
+            return lists[start];
+        }
+        if(start+1==end){
+           return merge(lists[start],lists[end]);
+        }
+        int mid = start + (end-start)/2;
+        ListNode* left = helperMerge(lists, start,mid);
+        ListNode* right = helperMerge(lists, mid+1,end);
+        return merge(left,right);
+
+    }
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(lists.empty()){
+            return nullptr;
+        }
+        return helperMerge(lists, 0, lists.size()-1);
+        
+    }
+};

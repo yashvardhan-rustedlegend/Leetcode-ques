@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int t)
+    {
+        int i,j;
+        bool ans=false;
+        for(i=0;i<matrix.size();i++)
+        {
+            for(j=0;j<matrix[0].size();j++)
+            {
+                if(t==matrix[i][j])
+                {
+                    ans=true;
+                    break;
+                }
+            }
+        }
+        return ans;
+    }
+};

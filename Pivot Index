@@ -1,0 +1,37 @@
+class Solution {
+    // int f(int nums[]) {
+    //     int lsum= 0, rsum=0;
+    //     for(int n: nums)
+    //         rsum+=n;
+        
+    //     for(int i=0;i<n;i++){
+    //         rsum-=nums[i];
+    //         if(rsum==lsum)
+    //             return i;
+    //         lsum+=nums[i];
+    //     }
+    //     return -1;
+    // }
+public:
+    int pivotIndex(vector<int>& nums) {
+        int sum = 0;
+        for(auto it: nums){
+            sum+=it;
+        }
+        int leftSum=0;
+        int rightSum=sum;
+        
+        for(int i=0;i<nums.size();i++){
+            if(i==0 || i==nums.size()-1){
+                if(sum-nums[i]==0)
+                    return i;
+            }
+            else if(leftSum==rightSum-nums[i]){
+                return i;
+            }
+            leftSum+=nums[i];
+            rightSum-=nums[i];
+        }
+        return -1;      
+    }
+};

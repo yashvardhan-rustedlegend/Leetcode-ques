@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        vector<char> tmp = chars;
+        if(chars.size() == 1) return 1;
+        
+        chars.clear();
+        for(int i=0;i<tmp.size();i++){
+            int cnt = 1;
+            char ch = tmp[i];
+            if(i+1 < tmp.size() && tmp[i] == tmp[i+1]){
+                while(i+1 < tmp.size() && tmp[i] == tmp[i+1]){
+                    i++;
+                    cnt++;
+                }
+                chars.push_back(ch);
+                string str = to_string(cnt);
+                for(auto it : str){
+                    chars.push_back(it);
+                }
+            }else{
+                chars.push_back(tmp[i]);
+            }
+        }
+        return chars.size();
+    }
+};

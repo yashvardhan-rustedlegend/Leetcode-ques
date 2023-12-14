@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void findCombination(int index,int n,int target,vector<int>& candidates,vector<int>& combination,vector<vector<int>>& ans){
+        if(index==n){
+            if(target==0)
+            {
+                ans.push_back(combination);
+            }
+            return;
+        }
+        if(candidates[index]<=target){
+            combination.push_back(candidates[index]);
+            findCombination(index,n,target-candidates[index],candidates,combination,ans);
+            combination.pop_back();
+        }
+        findCombination(index+1,n,target,candidates,combination,ans);
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        int index=0;
+        int n=candidates.size();
+        vector<vector<int>>ans;
+        vector<int>combination;
+        findCombination(index,n,target,candidates,combination,ans);
+        return ans;
+        
+    }
+};

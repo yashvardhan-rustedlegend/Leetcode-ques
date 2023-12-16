@@ -1,0 +1,20 @@
+class Solution {
+public:
+    void printSubset(vector<int>&nums, vector<int>&subset, vector<vector<int>>&ans,int index,int n){
+        if(index==n){
+            ans.push_back(subset);
+            return;
+        }
+        subset.push_back(nums[index]);
+        printSubset(nums,subset,ans,index+1,n);
+        subset.pop_back();
+        printSubset(nums,subset,ans,index+1,n);
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>>ans;
+        vector<int>subset;
+        printSubset(nums,subset,ans,0,nums.size());
+        return ans; 
+        
+    }
+};

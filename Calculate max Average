@@ -1,0 +1,35 @@
+#include<iostream>
+#include<vector>
+#include<unordered_map>
+ 
+using namespace std;
+ 
+int main() {
+    vector<pair<string,int>> matrix = {
+        make_pair("Alpha",92),
+        make_pair("Charlie",95),
+        make_pair("Bravo",98),
+        make_pair("Charlie",92),
+        make_pair("Tango",90)
+    };
+    
+    unordered_map<string, pair<int, int>> mp;
+    
+    for(int i = 0; i < matrix.size(); i++){
+        if(mp.find(matrix[i].first) != mp.end()){
+            mp[matrix[i].first].first++;
+            mp[matrix[i].first].second += matrix[i].second;
+        }
+        else{
+            mp[matrix[i].first] = make_pair(1, matrix[i].second);
+        }
+    }
+    
+    double maxi = -1;
+    for(auto it : mp){
+        double avg = static_cast<double>(it.second.second) / it.second.first;
+        maxi = max(avg, maxi);
+    }
+    cout << maxi;
+    return 0; 
+}

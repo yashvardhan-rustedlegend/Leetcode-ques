@@ -1,0 +1,46 @@
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+string findMinimumLengthSubstring(const string& input) {
+    if (input.empty()) {
+        return "";
+    }
+
+    unordered_map<char, int> charIndexMap;
+    int start = 0, end = 0;
+    int minLength = INT_MAX;
+    int minStart = 0;
+
+    while (end < input.length()) {
+        char currentChar = input[end];
+
+        if (charIndexMap.find(currentChar) != charIndexMap.end()) {
+            start = max(start, charIndexMap[currentChar] + 1);
+        }
+
+        charIndexMap[currentChar] = end;
+
+        if (end - start + 1 < minLength) {
+            minLength = end - start + 1;
+            minStart = start;
+        }
+
+        end++;
+    }
+
+    if (minLength == INT_MAX) {
+        return "";
+    }
+
+    return input.substr(minStart, minLength);
+}
+
+int main() {
+    string input = "abbbccfbbaacfba";
+    string result = findMinimumLengthSubstring(input);
+    cout << "Input string: " << input << endl;
+    cout << "Output: " << result << endl;
+
+    return 0;
+}
